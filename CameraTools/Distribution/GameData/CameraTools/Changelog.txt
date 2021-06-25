@@ -1,3 +1,71 @@
+v1.16.4
+ - Recompiled with KSP 1.12 assemblies.
+
+v1.16.3
+Bugfixes:
+ - Fix potential NRE when enabling IVA mode.
+ - Abort trying to enter IVA mode if it throws an exception.
+ - Don't add atmospheric controllers to objects that already have one.
+
+v1.16.2
+Bugfixes:
+ - Respect random mode when manually activating the camera.
+ - Exit IVA mode more reliably to avoid broken flickering camera.
+ - Performance optimisations to avoid GC allocations.
+
+v1.16.1
+Bugfixes:
+ - Fix NRE when vessel is destroyed before switching to IVA mode.
+ - Don't immediately re-enter IVA mode if manually switched out of it.
+
+v1.16.0
+Bugfixes:
+ - Try to reacquire a dogfight target if reverted due to a null dogfight target and Auto-Enable for BDArmory is enabled.
+ - Limit the type of vessels atmospheric audio gets added to to avoid saturating KSP's SoundManager channels unnecessarily.
+ - Fix indexing bug in 'pathing mode' (note: the example path is still weird).
+Improvements:
+ - Add sliders for configuring chances of 'random mode'.
+ - Add IVA view to 'random mode' (if the vessel has a cockpit, otherwise it counts as dogfight mode).
+ - In 'random mode', use the stationary camera when switching to views of a target that is close to the ground or about to crash.
+ - Improve the positioning of the stationary camera when switching to views of a target that is close to the ground or about to crash.
+ - Recover better from something else stealing the camera parent.
+
+v1.15.4
+Bugfixes:
+ - Exclude music volume levels from volumes based on distance from the camera.
+Improvements:
+ - Migrate non-static config files to PluginData to avoid invalidating the ModuleManager cache (should give slightly faster start-up times).
+
+v1.15.3
+Bugfixes:
+ - Disable slider discretisation when keypad control is enabled.
+ - Properly correct for time-warp under almost all conditions for dogfight mode. (It only gets the offset wrong between 70km and 100km above Kerbin and similarly on other bodies.)
+ - Eliminate pretty much all graphical glitches caused by floating origin and Krakensbane velocity shifts in dogfight mode.
+Improvements:
+ - Change the keypad move/zoom speeds to sliders for easier access.
+ - Add option to turn on lots of debugging.
+
+v1.15.2
+Bugfixes:
+ - Don't touch the camera when we're not in control of it!
+ - Use TimeWarp times instead of Time times for velocity calculations.
+Improvements:
+ - Allow switching into and out of IVA and Map modes.
+
+v1.15.1
+Bugfixes:
+ - Fix missing config file load/save bug.
+ - Update all version numbers properly.
+
+v1.15.0
+- A bunch of bugfixes.
+- Save settings properly.
+- Death camera: when in dogfight mode, temporarily follow the explosion when the followed plane gets destroyed.
+- Adjustable lerp (interpolation) rate for dogfight mode.
+- Adjustable roll amount (based on the followed craft) for dogfight mode.
+- Smoother transitions into dogfight mode.
+- Auto-enable for BDArmory.
+
 v1.14.0
 - Compatibility with KSP 1.9.x
 
@@ -20,7 +88,6 @@ v1.9.0
 v1.8.0
 - Compatibility with KSP 1.2.2 and KSP 1.2.9 BETA
 - Fixing isssue when reverting the camera
-
 
 v1.7.0
 - Compatibility with KSP 1.2.1

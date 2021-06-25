@@ -133,7 +133,7 @@ namespace CameraTools
 				}
 				catch(UnityException)
 				{
-					Debug.Log ("Invalid mouse: "+inputString);
+					Debug.Log ("[CameraTools]: Invalid mouse: "+inputString);
 				}
 			}
 			

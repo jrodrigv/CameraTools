@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{446E2470-00DC-4835-B62D-9DB8A7D41F4A}</ProjectGuid>
@@ -47,14 +47,14 @@
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <!-- <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet> -->
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <!-- <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet> -->
     <Optimize>true</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
     <DebugType>portable</DebugType>
@@ -62,36 +62,79 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="CamTools.cs" />
     <Compile Include="CCInputUtils.cs" />
     <Compile Include="CTAtmosphericAudioController.cs" />
     <Compile Include="CTPartAudioController.cs" />
     <Compile Include="CTPersistantFIeld.cs" />
-    <Compile Include="Curve3D.cs" />
-    <Compile Include="CameraTransformation.cs" />
-    <Compile Include="CameraPath.cs" />
+    <Compile Include="CamTools.cs" />
     <Compile Include="CameraKeyframe.cs" />
+    <Compile Include="CameraPath.cs" />
+    <Compile Include="CameraTransformation.cs" />
+    <Compile Include="Curve3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RotationAnimation.cs" />
     <Compile Include="Vector3Animation.cs" />
+    <Compile Include="VesselExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_LocalDev\KSPRefs\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\_LocalDev\KSPRefs\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="KSPAssets, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_LocalDev\KSPRefs\KSPAssets.dll</HintPath>
     </Reference>
+    <Reference Include="KSPAssets.XmlSerializers">
+      <HintPath>..\..\_LocalDev\KSPRefs\KSPAssets.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="KSPTrackIR">
+      <HintPath>..\..\_LocalDev\KSPRefs\KSPTrackIR.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>..\..\_LocalDev\KSPRefs\Unity.Timeline.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AnimationModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ARModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AssetBundleModule.dll</HintPath>
@@ -99,8 +142,38 @@
     <Reference Include="UnityEngine.AudioModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.FileSystemHttpModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.FileSystemHttpModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.HotReloadModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ImageConversionModule.dll</HintPath>
@@ -117,17 +190,59 @@
     <Reference Include="UnityEngine.JSONSerializeModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TerrainPhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TextCoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.TLSModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -139,8 +254,53 @@
     <Reference Include="UnityEngine.UIModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
       <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>..\..\_LocalDev\KSPRefs\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -152,20 +312,13 @@
     <Content Include="Distribution\GameData\CameraTools\Sounds\windloop.wav" />
     <Content Include="Distribution\GameData\CameraTools\Sounds\windtear.wav" />
     <Content Include="Distribution\GameData\CameraTools\Textures\icon.png" />
-    <Content Include="LocalDev\7za_dir.txt" />
-    <Content Include="LocalDev\dist_dir.txt" />
-    <Content Include="LocalDev\ksp_dir.txt" />
-    <Content Include="LocalDev\mono_exe.txt" />
-    <Content Include="LocalDev\pdb2mdb_exe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Distribution\GameData\CameraTools\ATM_CameraTools.cfg" />
     <None Include="Distribution\GameData\CameraTools\CameraTools.version" />
-    <None Include="Distribution\GameData\CameraTools\paths.cfg" />
-    <None Include="Distribution\GameData\CameraTools\settings.cfg" />
   </ItemGroup>
   <ItemGroup />
-  <PropertyGroup>
+  <!--  <PropertyGroup>
     <PostBuildEvent>@echo $(Targetname)
 @echo ...
 @echo set lpath vars from LocalDev storage...
@@ -196,5 +349,66 @@ copy /Y "$(TargetDir)$(Targetname).pdb" "%25KSP_DIR%25\GameData\CameraTools\Plug
 )
 
 @echo Build/deploy complete!</PostBuildEvent>
+  </PropertyGroup> -->
+  <PropertyGroup>
+    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT' ">
+      @echo $(Targetname)
+      @echo ...
+      @echo set lpath vars from LocalDev storage...
+      set /p KSP_DIR=&lt;"$(ProjectDir)LocalDev\ksp_dir.txt"
+      set /p PDB2MDB_EXE=&lt;"$(ProjectDir)LocalDev\pdb2mdb_exe.txt"
+      set /p ZA_DIR=&lt;"$(ProjectDir)LocalDev\7za_dir.txt"
+      set /p DIST_DIR=&lt;"$(ProjectDir)LocalDev\dist_dir.txt"
+
+      @echo distributing $(Targetname) files...
+      copy /Y "$(TargetPath)" "$(ProjectDir)Distribution\GameData\CameraTools\Plugins\"
+
+      if $(ConfigurationName) == Debug (
+      @echo building $(Targetname).dll.mdb file...
+      cd "$(TargetDir)"
+      copy /Y "$(TargetDir)$(Targetname).pdb" "%25KSP_DIR%25\GameData\CameraTools\Plugins\"
+      )
+
+      @echo packaging files...
+      if exist "%25DIST_DIR%25\CameraTools*.zip" del "%25DIST_DIR%25\CameraTools*.zip"
+      call "%25ZA_DIR%25\7za.exe" a -tzip -r  "%25DIST_DIR%25\CameraTools.@(VersionNumber)_%25DATE:~4,2%25%25DATE:~7,2%25%25DATE:~10,4%25.zip" "$(ProjectDir)Distribution\*.*"
+
+      @echo Deploy $(Targetname) Distribution files to test env:  %25KSP_DIR%25\GameData...
+      @echo copying:"$(SolutionDir)\CameraTools\Distribution\GameData" to "%25KSP_DIR%25\GameData" 
+      xcopy /E /Y "$(SolutionDir)\CameraTools\Distribution\GameData" "%25KSP_DIR%25\GameData"
+
+      if $(ConfigurationName) == Debug (
+      copy /Y "$(TargetDir)$(Targetname).pdb" "%25KSP_DIR%25\GameData\CameraTools\Plugins\"
+      )
+
+      @echo Build/deploy complete!
+    </PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' != 'Windows_NT' ">
+      echo $(Targetname)
+      export ModName=CameraTools
+      echo Copying assemblies to Distribution $(Targetname) files...
+      mkdir -p "$(ProjectDir)/Distribution/GameData/${ModName}/Plugins/"
+      cp -a "$(TargetDir)"CameraTools*.dll "$(ProjectDir)Distribution/GameData/${ModName}/Plugins/"
+      if [ "$(ConfigurationName)" = "Debug" ]
+      then
+        echo building debug files and symbols...
+        cp -a "$(TargetDir)"CameraTools*.pdb "$(ProjectDir)Distribution/GameData/${ModName}/Plugins/"
+      fi
+
+      if [ -e "$(ProjectDir)Distribution/${ModName}".*.zip ]
+      then
+        echo deleting previous build ...
+        rm "$(ProjectDir)Distribution/${ModName}".*.zip
+      fi
+      echo packaging new build...
+      7za  a -tzip -r  "$(ProjectDir)Distribution/${ModName}.@(VersionNumber)_`date -u -Iseconds`.zip" "$(ProjectDir)Distribution/*.*"
+
+      export KSP_DIR="`cat $(ProjectDir)../../_LocalDev/ksp_dir.txt`"
+      echo Deploy $(ProjectDir) Distribution files to test env:  "${KSP_DIR}/GameData"...
+      echo copying:"$(ProjectDir)Distribution/GameData" to "${KSP_DIR}/GameData" 
+      cp -a "$(ProjectDir)Distribution/GameData/${ModName}" "${KSP_DIR}/GameData"
+
+      echo Build/deploy complete!
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

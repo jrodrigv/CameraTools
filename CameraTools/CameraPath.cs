@@ -24,7 +24,7 @@ namespace CameraTools
 		public List<float> times;
 		public List<float> zooms;
 
-		public float lerpRate = 15;
+		public float lerpRate = 0.3f;
 		public float timeScale = 1;
 
 		Vector3Animation pointCurve;
@@ -58,7 +58,7 @@ namespace CameraTools
 
 		public void Save(ConfigNode node)
 		{
-			Debug.Log("Saving path: " + pathName);
+			Debug.Log("[CameraTools]: Saving path: " + pathName);
 			ConfigNode pathNode = node.AddNode("CAMERAPATH");
 			pathNode.AddValue("pathName", pathName);
 			pathNode.AddValue("points", WriteVectorList(points));
@@ -72,7 +72,7 @@ namespace CameraTools
 		public static string WriteVectorList(List<Vector3> list)
 		{
 			string output = string.Empty;
-			foreach(var val in list)
+			foreach (var val in list)
 			{
 				output += ConfigNode.WriteVector(val) + ";";
 			}
@@ -82,7 +82,7 @@ namespace CameraTools
 		public static string WriteQuaternionList(List<Quaternion> list)
 		{
 			string output = string.Empty;
-			foreach(var val in list)
+			foreach (var val in list)
 			{
 				output += ConfigNode.WriteQuaternion(val) + ";";
 			}
@@ -92,7 +92,7 @@ namespace CameraTools
 		public static string WriteFloatList(List<float> list)
 		{
 			string output = string.Empty;
-			foreach(var val in list)
+			foreach (var val in list)
 			{
 				output += val.ToString() + ";";
 			}
@@ -101,12 +101,18 @@ namespace CameraTools
 
 		public static List<Vector3> ParseVectorList(string arrayString)
 		{
-			string[] vectorStrings = arrayString.Split(new char[]{ ';' }, StringSplitOptions.RemoveEmptyEntries);
+			string[] vectorStrings = arrayString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 			List<Vector3> vList = new List<Vector3>();
-			for(int i = 0; i < vectorStrings.Length; i++)
+			for (int i = 0; i < vectorStrings.Length; i++)
 			{
-				Debug.Log("attempting to parse vector: --" + vectorStrings[i] + "--");
-				vList.Add(ConfigNode.ParseVector3(vectorStrings[i]));
+				try
+				{
+					vList.Add(ConfigNode.ParseVector3(vectorStrings[i]));
+				}
+				catch (Exception e)
+				{
+					Debug.LogError("[CameraTools]: Failed to parse vector: --" + vectorStrings[i] + "--, reason: " + e.Message);
+				}
 			}
 
 			return vList;
@@ -114,9 +120,9 @@ namespace CameraTools
 
 		public static List<Quaternion> ParseQuaternionList(string arrayString)
 		{
-			string[] qStrings = arrayString.Split(new char[]{ ';' }, StringSplitOptions.RemoveEmptyEntries);
+			string[] qStrings = arrayString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 			List<Quaternion> qList = new List<Quaternion>();
-			for(int i = 0; i < qStrings.Length; i++)
+			for (int i = 0; i < qStrings.Length; i++)
 			{
 				qList.Add(ConfigNode.ParseQuaternion(qStrings[i]));
 			}
@@ -126,9 +132,9 @@ namespace CameraTools
 
 		public static List<float> ParseFloatList(string arrayString)
 		{
-			string[] fStrings = arrayString.Split(new char[]{ ';' }, StringSplitOptions.RemoveEmptyEntries);
+			string[] fStrings = arrayString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 			List<float> fList = new List<float>();
-			for(int i = 0; i < fStrings.Length; i++)
+			for (int i = 0; i < fStrings.Length; i++)
 			{
 				fList.Add(float.Parse(fStrings[i]));
 			}
@@ -177,13 +183,13 @@ namespace CameraTools
 		public void Sort()
 		{
 			List<CameraKeyframe> keyframes = new List<CameraKeyframe>();
-			for(int i = 0; i < points.Count; i++)
+			for (int i = 0; i < points.Count; i++)
 			{
 				keyframes.Add(new CameraKeyframe(points[i], rotations[i], zooms[i], times[i]));
 			}
 			keyframes.Sort(new CameraKeyframeComparer());
 
-			for(int i = 0; i < keyframes.Count; i++)
+			for (int i = 0; i < keyframes.Count; i++)
 			{
 				points[i] = keyframes[i].position;
 				rotations[i] = keyframes[i].rotation;
@@ -203,7 +209,7 @@ namespace CameraTools
 			pointCurve = new Vector3Animation(points.ToArray(), times.ToArray());
 			rotationCurve = new RotationAnimation(rotations.ToArray(), times.ToArray());
 			zoomCurve = new AnimationCurve();
-			for(int i = 0; i < zooms.Count; i++)
+			for (int i = 0; i < zooms.Count; i++)
 			{
 				zoomCurve.AddKey(new Keyframe(times[i], zooms[i]));
 			}
@@ -220,7 +226,7 @@ namespace CameraTools
 		}
 
 
-	
+
 
 
 	}

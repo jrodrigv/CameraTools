@@ -26,7 +26,7 @@ namespace CameraTools
 		{
 			if(newPoints.Length != newTimes.Length)
 			{
-				Debug.LogError("Curve3D: points array must be same length as times array");
+				Debug.LogError("[CameraTools]: Curve3D: points array must be same length as times array");
 				return;
 			}
 			points = new Vector3[newPoints.Length];
@@ -48,7 +48,7 @@ namespace CameraTools
 			}
 			else
 			{
-				Debug.LogError("Tried to set new point in a Curve3D beyond the existing array.  Not yet implemented.");
+				Debug.LogError("[CameraTools]: Tried to set new point in a Curve3D beyond the existing array.  Not yet implemented.");
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace CameraTools
 		{
 			if(!curveReady)
 			{
-				Debug.LogWarning("Curve was accessed but it was not properly initialized.");
+				Debug.LogWarning("[CameraTools]: Curve was accessed but it was not properly initialized.");
 				return Vector3.zero;
 			}
 
@@ -106,7 +106,7 @@ namespace CameraTools
 		{
 			if(!curveReady)
 			{
-				Debug.LogWarning("Curve was accessed but it was not properly initialized.");
+				Debug.LogWarning("[CameraTools]: Curve was accessed but it was not properly initialized.");
 				return Vector3.one;
 			}
 

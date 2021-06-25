@@ -27,7 +27,7 @@ namespace CameraTools
 
 		void Start()
 		{
-			if(!audioSource)
+			if (!audioSource)
 			{
 				Destroy(this);
 				return;
@@ -38,18 +38,18 @@ namespace CameraTools
 			origRolloffMode = audioSource.rolloffMode;
 			audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
 			audioSource.spatialBlend = 1;
-	
+
 		}
 
 		void FixedUpdate()
 		{
-			if(!audioSource)
+			if (!audioSource)
 			{
 				Destroy(this);
 				return;
 			}
 
-			if(!part || !vessel)
+			if (!part || !vessel || !FlightCamera.fetch)
 			{
 				Destroy(this);
 				return;
@@ -66,32 +66,35 @@ namespace CameraTools
 			lagAudioFactor = Mathf.Clamp(lagAudioFactor * lagAudioFactor * lagAudioFactor, 0, 4);
 			lagAudioFactor += srfSpeed / 230;
 
-			float waveFrontFactor = ((3.67f * angleToCam)/srfSpeed);
+			float waveFrontFactor = ((3.67f * angleToCam) / srfSpeed);
 			waveFrontFactor = Mathf.Clamp(waveFrontFactor * waveFrontFactor * waveFrontFactor, 0, 2);
-			if(vessel.srfSpeed > CamTools.speedOfSound)
+			if (vessel.srfSpeed > CamTools.speedOfSound)
 			{
-				waveFrontFactor = (srfSpeed / (angleToCam) < 3.67f) ? waveFrontFactor + ((srfSpeed/(float)CamTools.speedOfSound)*waveFrontFactor): 0;
+				waveFrontFactor = (srfSpeed / (angleToCam) < 3.67f) ? waveFrontFactor + ((srfSpeed / (float)CamTools.speedOfSound) * waveFrontFactor) : 0;
 			}
 
 			lagAudioFactor *= waveFrontFactor;
-		
-			audioSource.minDistance = Mathf.Lerp(origMinDist, modMinDist * lagAudioFactor, Mathf.Clamp01((float)vessel.srfSpeed/30));
-			audioSource.maxDistance = Mathf.Lerp(origMaxDist,Mathf.Clamp(modMaxDist * lagAudioFactor, audioSource.minDistance, 16000), Mathf.Clamp01((float)vessel.srfSpeed/30));
-				
+
+			audioSource.minDistance = Mathf.Lerp(origMinDist, modMinDist * lagAudioFactor, Mathf.Clamp01((float)vessel.srfSpeed / 30));
+			audioSource.maxDistance = Mathf.Lerp(origMaxDist, Mathf.Clamp(modMaxDist * lagAudioFactor, audioSource.minDistance, 16000), Mathf.Clamp01((float)vessel.srfSpeed / 30));
+
 		}
 
 		void OnDestroy()
 		{
 			CamTools.OnResetCTools -= OnResetCTools;
 
-	
+
 		}
 
 		void OnResetCTools()
 		{
-			audioSource.minDistance = origMinDist;
-			audioSource.maxDistance = origMaxDist;
-			audioSource.rolloffMode = origRolloffMode;
+			if (audioSource != null)
+			{
+				audioSource.minDistance = origMinDist;
+				audioSource.maxDistance = origMaxDist;
+				audioSource.rolloffMode = origRolloffMode;
+			}
 			Destroy(this);
 		}
 
